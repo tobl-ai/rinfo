@@ -20,6 +20,13 @@ import { PercentileDistributionChart } from "@/components/charts/percentile-dist
 import { IllNetworkChart } from "@/components/charts/ill-network-chart";
 import { StatsSummaryTable } from "@/components/charts/stats-summary-table";
 import { CorrelationHeatmap } from "@/components/charts/correlation-heatmap";
+import { RegressionChart } from "@/components/charts/regression-chart";
+import { GiniLorenzChart } from "@/components/charts/gini-lorenz-chart";
+import { ClusterChart } from "@/components/charts/cluster-chart";
+import { OutlierTable } from "@/components/charts/outlier-table";
+import { CvComparisonChart } from "@/components/charts/cv-comparison-chart";
+import { BoxPlotChart } from "@/components/charts/box-plot-chart";
+import { ParetoChart } from "@/components/charts/pareto-chart";
 import type { University } from "@/types/university";
 
 interface Props {
@@ -29,6 +36,7 @@ interface Props {
 const SECTIONS = [
   { id: "overview", label: "개요" },
   { id: "deep", label: "심층 분석" },
+  { id: "advanced", label: "고급 통계" },
   { id: "stats", label: "통계 요약" },
 ];
 
@@ -40,9 +48,9 @@ export function ChartsSection({ universities }: Props) {
       <div className="mb-6">
         <Tabs tabs={SECTIONS} defaultTab={section} onChange={setSection} />
       </div>
-
       {section === "overview" && <OverviewCharts universities={universities} />}
       {section === "deep" && <DeepCharts universities={universities} />}
+      {section === "advanced" && <AdvancedCharts universities={universities} />}
       {section === "stats" && <StatsCharts universities={universities} />}
     </div>
   );
@@ -107,6 +115,36 @@ function DeepCharts({ universities }: Props) {
           <IllNetworkChart universities={universities} />
         </Section>
       </div>
+    </div>
+  );
+}
+
+function AdvancedCharts({ universities }: Props) {
+  return (
+    <div className="space-y-6">
+      <Section title="선형 회귀 분석 (OLS)">
+        <RegressionChart universities={universities} />
+      </Section>
+      <Section title="지니계수 · 로렌츠 곡선">
+        <GiniLorenzChart universities={universities} />
+      </Section>
+      <div className="grid gap-6 lg:grid-cols-2">
+        <Section title="K-Means 클러스터링">
+          <ClusterChart universities={universities} />
+        </Section>
+        <Section title="파레토 분석 (80/20)">
+          <ParetoChart universities={universities} />
+        </Section>
+        <Section title="박스플롯 (설립유형별 분포)">
+          <BoxPlotChart universities={universities} />
+        </Section>
+        <Section title="변동계수(CV) 비교">
+          <CvComparisonChart universities={universities} />
+        </Section>
+      </div>
+      <Section title="Z-Score 이상치 탐지 (|z| ≥ 2.5)">
+        <OutlierTable universities={universities} />
+      </Section>
     </div>
   );
 }
