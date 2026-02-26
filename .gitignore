@@ -1,0 +1,9 @@
+node_modules/
+.next/
+.claude/
+scripts/output/
+scripts/node_modules/
+*.env
+*.env.local
+*.pdf
+*.xlsx
