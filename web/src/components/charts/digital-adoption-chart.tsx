@@ -31,7 +31,7 @@ export function DigitalAdoptionChart({ universities }: Props) {
       </p>
       <ChartWrapper height={400}>
         <ScatterChart margin={{ bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" />
           <XAxis type="number" dataKey="x" name="전자자료 비율" unit="%" fontSize={11} />
           <YAxis type="number" dataKey="y" name="1인당 다운로드" fontSize={11} />
           <ZAxis type="number" dataKey="z" range={[20, 400]} />
@@ -50,9 +50,12 @@ export function DigitalAdoptionChart({ universities }: Props) {
               );
             }}
           />
-          <Scatter data={data} fill="#5bacd8" fillOpacity={0.6} />
+          <Scatter data={data} fill="#4a90d9" fillOpacity={0.6} />
         </ScatterChart>
       </ChartWrapper>
+      <p className="mt-3 rounded-lg bg-rinfo-50/60 p-3 text-xs leading-relaxed text-rinfo-700">
+        전자자료에 예산을 많이 투자한 대학이 실제로 더 많이 활용하는지 보여줍니다. 오른쪽 위에 위치한 대학은 전자자료 비중도 높고, 학생들의 DB 이용도 활발한 대학입니다. 점이 클수록 전자자료 총 예산이 큰 대학입니다.
+      </p>
     </div>
   );
 }

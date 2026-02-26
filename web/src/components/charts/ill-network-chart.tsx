@@ -30,7 +30,7 @@ export function IllNetworkChart({ universities }: Props) {
       </p>
       <ChartWrapper height={400}>
         <BarChart data={data} layout="vertical" margin={{ left: 10 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" horizontal={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" horizontal={false} />
           <XAxis type="number" fontSize={11} />
           <YAxis type="category" dataKey="name" width={85} fontSize={10} />
           <Tooltip
@@ -48,10 +48,13 @@ export function IllNetworkChart({ universities }: Props) {
             }}
           />
           <Legend />
-          <Bar dataKey="신청" stackId="a" fill="#5bacd8" />
-          <Bar dataKey="제공" stackId="a" fill="#5b9a3c" />
+          <Bar dataKey="신청" stackId="a" fill="#4a90d9" />
+          <Bar dataKey="제공" stackId="a" fill="#f47721" />
         </BarChart>
       </ChartWrapper>
+      <p className="mt-3 rounded-lg bg-rinfo-50/60 p-3 text-xs leading-relaxed text-rinfo-700">
+        상호대차는 다른 도서관의 자료를 빌려주거나 빌려오는 서비스입니다. &quot;신청&quot;은 다른 도서관에 요청한 건수, &quot;제공&quot;은 다른 도서관에 빌려준 건수입니다. 제공이 많은 대학은 장서가 풍부하여 다른 대학에 기여하는 도서관입니다.
+      </p>
     </div>
   );
 }

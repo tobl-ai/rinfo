@@ -19,10 +19,10 @@ const METRICS = [
 ];
 
 const COLORS = [
-  "#3d7a28", "#4a8530", "#5b9a3c", "#6aad2d", "#8dc63f",
-  "#9ad04e", "#a8d96a", "#b8dfaa", "#c5e8b8", "#d2efc8",
-  "#d8f0d0", "#dcefd3", "#e2f2dc", "#e8f5e5", "#eef8ee",
-  "#f0f7ec", "#f2f9f0", "#f5faf4", "#f8fcf7", "#fafdf9",
+  "#b85213", "#d96518", "#f47721", "#f58d3d", "#ffb36e",
+  "#ffc48a", "#ffd4aa", "#ffe0c0", "#ffe8d0", "#fff0e0",
+  "#fff3e6", "#fff5eb", "#fff7f0", "#fff9f4", "#fffaf7",
+  "#fffbf8", "#fffcfa", "#fffdfb", "#fffefd", "#fffffe",
 ];
 
 export function TopUniversitiesChart({ universities }: Props) {
@@ -39,6 +39,10 @@ export function TopUniversitiesChart({ universities }: Props) {
       raw: metric.fn(u),
     }));
 
+  const top1 = data[0];
+  const top5Avg = data.slice(0, 5).reduce((s, d) => s + d.value, 0) / 5;
+  const top20Avg = data.reduce((s, d) => s + d.value, 0) / data.length;
+
   return (
     <div>
       <div className="mb-3">
@@ -50,7 +54,7 @@ export function TopUniversitiesChart({ universities }: Props) {
       </div>
       <ChartWrapper height={500}>
         <BarChart data={data} layout="vertical" margin={{ left: 20 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" horizontal={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" horizontal={false} />
           <XAxis type="number" fontSize={11} />
           <YAxis type="category" dataKey="name" width={100} fontSize={11} />
           <Tooltip
@@ -72,6 +76,9 @@ export function TopUniversitiesChart({ universities }: Props) {
           </Bar>
         </BarChart>
       </ChartWrapper>
+      <p className="mt-3 rounded-lg bg-rinfo-50/60 p-3 text-xs leading-relaxed text-rinfo-700">
+        {metric.label} 기준 1위는 &quot;{top1?.fullName}&quot;({top1?.value} {metric.unit})입니다. 상위 5개 대학 평균은 {Math.round(top5Avg * 10) / 10} {metric.unit}, 상위 20개 평균은 {Math.round(top20Avg * 10) / 10} {metric.unit}으로, 상위권 대학 간에도 편차가 있습니다.
+      </p>
     </div>
   );
 }

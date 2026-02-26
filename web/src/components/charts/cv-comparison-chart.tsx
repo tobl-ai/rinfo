@@ -46,7 +46,7 @@ export function CvComparisonChart({ universities }: Props) {
     <div>
       <ChartWrapper height={400}>
         <BarChart data={data} layout="vertical" margin={{ left: 30 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" horizontal={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" horizontal={false} />
           <XAxis type="number" fontSize={11} unit="%" />
           <YAxis type="category" dataKey="name" width={110} fontSize={11} />
           <Tooltip
@@ -64,7 +64,7 @@ export function CvComparisonChart({ universities }: Props) {
           />
           <Bar dataKey="cv" radius={[0, 4, 4, 0]}>
             {data.map((d, i) => (
-              <Cell key={i} fill={d.cv > 100 ? "#e74c3c" : d.cv > 50 ? "#ff8b54" : "#5b9a3c"} />
+              <Cell key={i} fill={d.cv > 100 ? "#e74c3c" : d.cv > 50 ? "#5bba6f" : "#f47721"} />
             ))}
           </Bar>
         </BarChart>

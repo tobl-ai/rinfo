@@ -22,6 +22,7 @@ export function UniversityTable({ universities }: Props) {
   const [typeFilter, setTypeFilter] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [sizeFilter, setSizeFilter] = useState("");
+  const [hideOutliers, setHideOutliers] = useState(false);
   const [sortKey, setSortKey] = useState<SortKey>("name");
   const [sortAsc, setSortAsc] = useState(true);
   const [visibleCount, setVisibleCount] = useState(50);
@@ -40,8 +41,28 @@ export function UniversityTable({ universities }: Props) {
     [universities]
   );
 
+  const outlierIds = useMemo(() => {
+    const ids = new Set<string>();
+    const keys = ["booksPerStudent", "budgetPerStudent", "loansPerStudent"] as const;
+    for (const key of keys) {
+      const vals = universities.filter((u) => u.studentsCurrYear > 0).map((u) => u.indicators[key]);
+      const n = vals.length;
+      if (n === 0) continue;
+      const mean = vals.reduce((a, b) => a + b, 0) / n;
+      const std = Math.sqrt(vals.reduce((s, v) => s + (v - mean) ** 2, 0) / n);
+      if (std === 0) continue;
+      for (const u of universities) {
+        if (u.studentsCurrYear > 0 && Math.abs((u.indicators[key] - mean) / std) >= 2.5) {
+          ids.add(u.id);
+        }
+      }
+    }
+    return ids;
+  }, [universities]);
+
   const filtered = useMemo(() => {
     let result = universities;
+    if (hideOutliers) result = result.filter((u) => !outlierIds.has(u.id));
     if (search) {
       const q = search.toLowerCase();
       result = result.filter((u) => u.name.toLowerCase().includes(q));
@@ -50,7 +71,7 @@ export function UniversityTable({ universities }: Props) {
     if (categoryFilter) result = result.filter((u) => u.category === categoryFilter);
     if (sizeFilter) result = result.filter((u) => u.size === sizeFilter);
     return result;
-  }, [universities, search, typeFilter, categoryFilter, sizeFilter]);
+  }, [universities, search, typeFilter, categoryFilter, sizeFilter, hideOutliers, outlierIds]);
 
   const sorted = useMemo(() => {
     const getValue = (u: University): string | number => {
@@ -73,7 +94,7 @@ export function UniversityTable({ universities }: Props) {
 
   useEffect(() => {
     setVisibleCount(50);
-  }, [search, typeFilter, categoryFilter, sizeFilter, sortKey, sortAsc]);
+  }, [search, typeFilter, categoryFilter, sizeFilter, sortKey, sortAsc, hideOutliers]);
 
   const loadMore = useCallback(() => {
     setVisibleCount((prev) => Math.min(prev + 50, sorted.length));
@@ -134,6 +155,15 @@ export function UniversityTable({ universities }: Props) {
           <option value="">규모 전체</option>
           {sizes.map((s) => <option key={s} value={s}>{s}</option>)}
         </select>
+        <label className="flex items-center gap-1.5 self-center text-sm text-gray-500">
+          <input
+            type="checkbox"
+            checked={hideOutliers}
+            onChange={(e) => setHideOutliers(e.target.checked)}
+            className="h-4 w-4 rounded border-rinfo-300 accent-rinfo-500"
+          />
+          이상치 제외({outlierIds.size}개)
+        </label>
         <span className="self-center text-sm text-gray-500">
           {sorted.length}개 대학
         </span>

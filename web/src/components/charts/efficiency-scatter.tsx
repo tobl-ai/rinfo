@@ -44,10 +44,10 @@ const AXES = [
 ];
 
 const TYPE_COLORS: Record<string, string> = {
-  "국립": "#3d7a28",
-  "공립": "#6aad2d",
-  "사립": "#5bacd8",
-  "특별법법인": "#ff8b54",
+  "국립": "#b85213",
+  "공립": "#f58d3d",
+  "사립": "#4a90d9",
+  "특별법법인": "#5bba6f",
 };
 
 export function EfficiencyScatter({ universities }: Props) {
@@ -74,7 +74,7 @@ export function EfficiencyScatter({ universities }: Props) {
       </div>
       <ChartWrapper height={400}>
         <ScatterChart margin={{ bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" />
           <XAxis type="number" dataKey="x" name={axis.xLabel} fontSize={11} />
           <YAxis type="number" dataKey="y" name={axis.yLabel} fontSize={11} />
           <ZAxis type="number" dataKey="z" range={[20, 300]} />
@@ -112,6 +112,9 @@ export function EfficiencyScatter({ universities }: Props) {
           </span>
         ))}
       </div>
+      <p className="mt-3 rounded-lg bg-rinfo-50/60 p-3 text-xs leading-relaxed text-rinfo-700">
+        도서관에 투자한 자원(예산, 직원, 시설)이 실제 이용(대출, 방문)으로 이어지는지 보여주는 차트입니다. 오른쪽 위에 있는 대학은 투입도 많고 성과도 높으며, 색상으로 설립유형을 구분할 수 있습니다.
+      </p>
     </div>
   );
 }

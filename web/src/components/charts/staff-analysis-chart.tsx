@@ -53,7 +53,7 @@ export function StaffAnalysisChart({ universities }: Props) {
       <ChartWrapper height={350}>
         {view === "ratio" ? (
           <BarChart data={data} margin={{ left: 10 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" />
             <XAxis dataKey="name" fontSize={11} />
             <YAxis fontSize={11} />
             <Tooltip
@@ -72,12 +72,12 @@ export function StaffAnalysisChart({ universities }: Props) {
               }}
             />
             <Legend />
-            <Bar dataKey="사서" stackId="a" fill="#5b9a3c" />
-            <Bar dataKey="기타직원" stackId="a" fill="#b8dfaa" />
+            <Bar dataKey="사서" stackId="a" fill="#f47721" />
+            <Bar dataKey="기타직원" stackId="a" fill="#ffe0c0" />
           </BarChart>
         ) : (
           <BarChart data={data} margin={{ left: 10 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" />
             <XAxis dataKey="name" fontSize={11} />
             <YAxis fontSize={11} unit={view === "per1000" ? "명" : "%"} />
             <Tooltip
@@ -96,12 +96,15 @@ export function StaffAnalysisChart({ universities }: Props) {
             />
             <Bar dataKey={view === "per1000" ? "1000명당직원" : "정규직비율"} radius={[4, 4, 0, 0]}>
               {data.map((_, i) => (
-                <Cell key={i} fill={["#3d7a28", "#5b9a3c", "#5bacd8", "#ff8b54"][i % 4]} />
+                <Cell key={i} fill={["#b85213", "#f47721", "#4a90d9", "#5bba6f"][i % 4]} />
               ))}
             </Bar>
           </BarChart>
         )}
       </ChartWrapper>
+      <p className="mt-3 rounded-lg bg-rinfo-50/60 p-3 text-xs leading-relaxed text-rinfo-700">
+        설립유형별 도서관 인력 현황입니다. &quot;사서 비율&quot; 탭은 전체 직원 중 전문 사서 비중을, &quot;1,000명당&quot; 탭은 재학생 규모 대비 직원 수를, &quot;정규직 비율&quot; 탭은 고용 안정성을 보여줍니다.
+      </p>
     </div>
   );
 }

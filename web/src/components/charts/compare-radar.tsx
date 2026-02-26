@@ -16,7 +16,7 @@ interface Props {
   universities: University[];
 }
 
-const COLORS = ["#5b9a3c", "#ff8b54", "#5bacd8", "#8dc63f", "#3d7a28"];
+const COLORS = ["#f47721", "#5bba6f", "#4a90d9", "#ffb36e", "#b85213"];
 
 const METRICS = [
   { key: "booksPerStudent", label: "1인당 도서" },
@@ -49,7 +49,7 @@ export function CompareRadar({ universities }: Props) {
   return (
     <ChartWrapper height={400}>
       <RadarChart data={data}>
-        <PolarGrid stroke="#dcefd3" />
+        <PolarGrid stroke="#fff5eb" />
         <PolarAngleAxis dataKey="metric" fontSize={11} />
         <PolarRadiusAxis tick={false} domain={[0, 100]} />
         {universities.map((u, i) => (

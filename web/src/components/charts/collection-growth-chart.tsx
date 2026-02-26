@@ -48,7 +48,7 @@ export function CollectionGrowthChart({ universities }: Props) {
       </div>
       <ChartWrapper height={350}>
         <BarChart data={data} margin={{ left: 10 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" />
           <XAxis dataKey="name" fontSize={10} angle={-20} textAnchor="end" height={60} />
           <YAxis fontSize={11} />
           {mode === "net" && <ReferenceLine y={0} stroke="#999" strokeDasharray="3 3" />}
@@ -68,11 +68,14 @@ export function CollectionGrowthChart({ universities }: Props) {
           />
           <Bar dataKey="avg" radius={[4, 4, 0, 0]}>
             {data.map((d, i) => (
-              <Cell key={i} fill={d.avg >= 0 ? "#5b9a3c" : "#e74c3c"} />
+              <Cell key={i} fill={d.avg >= 0 ? "#f47721" : "#e74c3c"} />
             ))}
           </Bar>
         </BarChart>
       </ChartWrapper>
+      <p className="mt-3 rounded-lg bg-rinfo-50/60 p-3 text-xs leading-relaxed text-rinfo-700">
+        학교유형별로 장서가 1년간 얼마나 늘거나 줄었는지 평균을 보여줍니다. &quot;순증감&quot; 탭에서는 증가와 폐기를 합산한 실제 변화량을 확인할 수 있습니다. 빨간 막대는 폐기가 증가보다 많았던 유형입니다.
+      </p>
     </div>
   );
 }

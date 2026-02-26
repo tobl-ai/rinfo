@@ -92,11 +92,11 @@ export default function ComparePage() {
                 className="inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm text-white"
                 style={{
                   backgroundColor: [
-                    "#5b9a3c",
-                    "#ff8b54",
-                    "#5bacd8",
-                    "#8dc63f",
-                    "#3d7a28",
+                    "#f47721",
+                    "#5bba6f",
+                    "#4a90d9",
+                    "#ffb36e",
+                    "#b85213",
                   ][i],
                 }}
               >
@@ -220,7 +220,7 @@ function CompareTable({ universities }: { universities: University[] }) {
     },
   ];
 
-  const colors = ["#5b9a3c", "#ff8b54", "#5bacd8", "#8dc63f", "#3d7a28"];
+  const colors = ["#f47721", "#5bba6f", "#4a90d9", "#ffb36e", "#b85213"];
 
   return (
     <div className="overflow-x-auto rounded-xl border border-rinfo-200/60">

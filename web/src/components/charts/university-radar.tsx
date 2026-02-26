@@ -40,21 +40,21 @@ export function UniversityRadar({ university, averages }: Props) {
   return (
     <ChartWrapper height={350}>
       <RadarChart data={data}>
-        <PolarGrid stroke="#dcefd3" />
+        <PolarGrid stroke="#fff5eb" />
         <PolarAngleAxis dataKey="metric" fontSize={11} />
         <PolarRadiusAxis tick={false} domain={[0, "auto"]} />
         <Radar
           name={university.name}
           dataKey="대학"
-          stroke="#5b9a3c"
-          fill="#5b9a3c"
+          stroke="#f47721"
+          fill="#f47721"
           fillOpacity={0.3}
         />
         <Radar
           name="전체 평균"
           dataKey="평균"
-          stroke="#ff8b54"
-          fill="#ff8b54"
+          stroke="#5bba6f"
+          fill="#5bba6f"
           fillOpacity={0.08}
           strokeDasharray="5 5"
         />

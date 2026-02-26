@@ -47,7 +47,7 @@ export function PercentileDistributionChart({ universities }: Props) {
     { name: "상위 10%", value: stats.p90 },
   ];
 
-  const barColors = ["#e74c3c", "#ff8b54", "#f0c040", "#6aad2d", "#3d7a28"];
+  const barColors = ["#e74c3c", "#5bba6f", "#f0c040", "#f58d3d", "#b85213"];
 
   return (
     <div>
@@ -56,10 +56,10 @@ export function PercentileDistributionChart({ universities }: Props) {
       </div>
       <ChartWrapper height={300}>
         <BarChart data={data} margin={{ left: 10 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" />
           <XAxis dataKey="name" fontSize={11} />
           <YAxis fontSize={11} />
-          <ReferenceLine y={stats.mean} stroke="#5bacd8" strokeDasharray="5 5" label={{ value: `평균 ${stats.mean}`, fill: "#5bacd8", fontSize: 11 }} />
+          <ReferenceLine y={stats.mean} stroke="#4a90d9" strokeDasharray="5 5" label={{ value: `평균 ${stats.mean}`, fill: "#4a90d9", fontSize: 11 }} />
           <Tooltip
             content={({ payload, label }) => {
               if (!payload?.length) return null;

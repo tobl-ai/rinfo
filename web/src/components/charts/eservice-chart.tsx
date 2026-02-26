@@ -18,8 +18,8 @@ const METRICS = [
 ];
 
 const COLORS = [
-  "#3d7a28", "#4a8530", "#5b9a3c", "#6aad2d", "#8dc63f",
-  "#9ad04e", "#a8d96a", "#b8dfaa", "#c5e8b8", "#d2efc8",
+  "#b85213", "#d96518", "#f47721", "#f58d3d", "#ffb36e",
+  "#ffc48a", "#ffd4aa", "#ffe0c0", "#ffe8d0", "#fff0e0",
 ];
 
 export function EserviceChart({ universities }: Props) {
@@ -42,7 +42,7 @@ export function EserviceChart({ universities }: Props) {
       </div>
       <ChartWrapper height={400}>
         <BarChart data={data} layout="vertical" margin={{ left: 20 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" horizontal={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" horizontal={false} />
           <XAxis type="number" fontSize={11} />
           <YAxis type="category" dataKey="name" width={100} fontSize={11} />
           <Tooltip
@@ -64,6 +64,9 @@ export function EserviceChart({ universities }: Props) {
           </Bar>
         </BarChart>
       </ChartWrapper>
+      <p className="mt-3 rounded-lg bg-rinfo-50/60 p-3 text-xs leading-relaxed text-rinfo-700">
+        온라인 도서관 서비스를 가장 활발하게 제공하는 상위 10개 대학입니다. 탭을 바꾸면 홈페이지 방문, 목록 검색(OPAC), 데이터베이스 검색, 전문 다운로드 각각의 순위를 확인할 수 있습니다.
+      </p>
     </div>
   );
 }

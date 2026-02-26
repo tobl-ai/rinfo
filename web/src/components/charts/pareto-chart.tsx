@@ -65,7 +65,7 @@ export function ParetoChart({ universities }: Props) {
       </div>
       <ChartWrapper height={450}>
         <ComposedChart data={data} margin={{ left: 10, bottom: 60 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" />
           <XAxis dataKey="name" fontSize={9} angle={-45} textAnchor="end" height={80} />
           <YAxis yAxisId="left" fontSize={11} />
           <YAxis yAxisId="right" orientation="right" fontSize={11} unit="%" domain={[0, 100]} />
@@ -84,7 +84,7 @@ export function ParetoChart({ universities }: Props) {
           />
           <Bar yAxisId="left" dataKey="value" radius={[2, 2, 0, 0]}>
             {data.map((_, i) => (
-              <Cell key={i} fill={i < data.length * 0.2 ? "#3d7a28" : i < data.length * 0.5 ? "#6aad2d" : "#b8dfaa"} />
+              <Cell key={i} fill={i < data.length * 0.2 ? "#b85213" : i < data.length * 0.5 ? "#f58d3d" : "#ffe0c0"} />
             ))}
           </Bar>
           <Line yAxisId="right" dataKey="cumPct" stroke="#e74c3c" strokeWidth={2} dot={false} />

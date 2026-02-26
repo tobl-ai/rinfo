@@ -67,7 +67,7 @@ export function GiniLorenzChart({ universities }: Props) {
       </div>
       <ChartWrapper height={400}>
         <ComposedChart data={data} margin={{ bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" />
           <XAxis dataKey="x" type="number" fontSize={11} unit="%" label={{ value: "누적 대학 비율", position: "insideBottom", offset: -2, fontSize: 10 }} />
           <YAxis type="number" fontSize={11} unit="%" label={{ value: "누적 자원 비율", angle: -90, position: "insideLeft", fontSize: 10 }} />
           <Tooltip
@@ -84,7 +84,7 @@ export function GiniLorenzChart({ universities }: Props) {
             }}
           />
           <Line dataKey="완전평등" stroke="#ccc" strokeDasharray="5 5" dot={false} />
-          <Area dataKey="실제분포" stroke="#5b9a3c" fill="#5b9a3c" fillOpacity={0.2} dot={false} />
+          <Area dataKey="실제분포" stroke="#f47721" fill="#f47721" fillOpacity={0.2} dot={false} />
         </ComposedChart>
       </ChartWrapper>
       <p className="mt-3 rounded-lg bg-rinfo-50/60 p-3 text-xs leading-relaxed text-rinfo-700">

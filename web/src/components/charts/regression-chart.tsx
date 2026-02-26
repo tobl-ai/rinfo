@@ -89,7 +89,7 @@ export function RegressionChart({ universities }: Props) {
       </div>
       <ChartWrapper height={400}>
         <ComposedChart data={data} margin={{ bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" />
           <XAxis type="number" dataKey="x" name={pair.xLabel} fontSize={11} />
           <YAxis type="number" dataKey="y" name={pair.yLabel} fontSize={11} />
           <Tooltip
@@ -105,7 +105,7 @@ export function RegressionChart({ universities }: Props) {
               );
             }}
           />
-          <Scatter dataKey="y" fill="#5bacd8" fillOpacity={0.5} />
+          <Scatter dataKey="y" fill="#4a90d9" fillOpacity={0.5} />
           <Line
             data={reg.trendline}
             dataKey="trend"

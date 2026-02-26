@@ -61,7 +61,7 @@ export function BudgetCompositionChart({ universities }: Props) {
       </div>
       <ChartWrapper height={400}>
         <BarChart data={data} margin={{ left: 10 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" />
           <XAxis dataKey="name" fontSize={11} />
           <YAxis fontSize={11} />
           <Tooltip
@@ -80,12 +80,15 @@ export function BudgetCompositionChart({ universities }: Props) {
             }}
           />
           <Legend />
-          <Bar dataKey="국내도서" stackId="a" fill="#3d7a28" />
-          <Bar dataKey="국외도서" stackId="a" fill="#6aad2d" />
-          <Bar dataKey="전자저널" stackId="a" fill="#5bacd8" />
-          <Bar dataKey="웹DB" stackId="a" fill="#ff8b54" />
+          <Bar dataKey="국내도서" stackId="a" fill="#b85213" />
+          <Bar dataKey="국외도서" stackId="a" fill="#f58d3d" />
+          <Bar dataKey="전자저널" stackId="a" fill="#4a90d9" />
+          <Bar dataKey="웹DB" stackId="a" fill="#5bba6f" />
         </BarChart>
       </ChartWrapper>
+      <p className="mt-3 rounded-lg bg-rinfo-50/60 p-3 text-xs leading-relaxed text-rinfo-700">
+        자료구입비를 국내도서, 국외도서, 전자저널, 웹DB 네 가지로 나눠서 보여줍니다. 탭을 전환하면 설립유형, 규모, 학교유형별 비교가 가능합니다. 전자저널과 웹DB 비중이 높은 그룹은 디지털 전환이 더 진행된 것으로 볼 수 있습니다.
+      </p>
     </div>
   );
 }

@@ -61,7 +61,7 @@ export function BoxPlotChart({ universities }: Props) {
     for (const group of GROUPS) {
       const vals = active.filter((u) => u.type === group).map(indicator.fn).filter((v) => isFinite(v) && v >= 0);
       if (vals.length < 5) continue;
-      allStats.push({ label: group, stats: quartiles(vals), color: group === "국립" ? "#3d7a28" : group === "사립" ? "#5bacd8" : "#ff8b54" });
+      allStats.push({ label: group, stats: quartiles(vals), color: group === "국립" ? "#b85213" : group === "사립" ? "#4a90d9" : "#5bba6f" });
     }
 
     const allVals = active.map(indicator.fn).filter((v) => isFinite(v) && v >= 0);

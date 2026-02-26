@@ -1,35 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f8faf7;
-  --foreground: #1a2e1a;
+  --background: #fefaf7;
+  --foreground: #2a1a0a;
 
-  /* rinfo Brand Colors */
-  --rinfo-green-50: #f0f7ec;
-  --rinfo-green-100: #dcefd3;
-  --rinfo-green-200: #b8dfaa;
-  --rinfo-green-300: #8dc63f;
-  --rinfo-green-400: #6aad2d;
-  --rinfo-green-500: #5b9a3c;
-  --rinfo-green-600: #4a8530;
-  --rinfo-green-700: #3d7a28;
-  --rinfo-green-800: #2d5c1e;
-  --rinfo-green-900: #1a3a12;
+  /* rinfo Brand Colors — Orange Primary */
+  --rinfo-50: #fff7f0;
+  --rinfo-100: #ffead5;
+  --rinfo-200: #ffd4aa;
+  --rinfo-300: #ffb36e;
+  --rinfo-400: #f58d3d;
+  --rinfo-500: #f47721;
+  --rinfo-600: #d96518;
+  --rinfo-700: #b85213;
+  --rinfo-800: #8c3e10;
+  --rinfo-900: #5c280a;
 
-  --rinfo-sky-50: #edf7fc;
-  --rinfo-sky-100: #d0ecf8;
-  --rinfo-sky-200: #a3d8f0;
-  --rinfo-sky-300: #6bb8d9;
-  --rinfo-sky-400: #5bacd8;
-  --rinfo-sky-500: #3d93c4;
-  --rinfo-sky-600: #2d7aaa;
+  /* Secondary: Blue (차트 보조색) */
+  --rinfo-blue-400: #4a90d9;
+  --rinfo-blue-500: #3478c2;
 
-  --rinfo-orange-50: #fff5ef;
-  --rinfo-orange-100: #ffe4d2;
-  --rinfo-orange-200: #ffc9a5;
-  --rinfo-orange-300: #ff8b54;
-  --rinfo-orange-400: #e87740;
-  --rinfo-orange-500: #d4652e;
+  /* Secondary: Green (차트 보조색) */
+  --rinfo-green-400: #5bba6f;
+  --rinfo-green-500: #45a049;
 }
 
 @theme inline {
@@ -38,31 +31,16 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  /* Custom brand colors for Tailwind */
-  --color-rinfo-50: var(--rinfo-green-50);
-  --color-rinfo-100: var(--rinfo-green-100);
-  --color-rinfo-200: var(--rinfo-green-200);
-  --color-rinfo-300: var(--rinfo-green-300);
-  --color-rinfo-400: var(--rinfo-green-400);
-  --color-rinfo-500: var(--rinfo-green-500);
-  --color-rinfo-600: var(--rinfo-green-600);
-  --color-rinfo-700: var(--rinfo-green-700);
-  --color-rinfo-800: var(--rinfo-green-800);
-  --color-rinfo-900: var(--rinfo-green-900);
-
-  --color-sky-r-50: var(--rinfo-sky-50);
-  --color-sky-r-100: var(--rinfo-sky-100);
-  --color-sky-r-200: var(--rinfo-sky-200);
-  --color-sky-r-300: var(--rinfo-sky-300);
-  --color-sky-r-400: var(--rinfo-sky-400);
-  --color-sky-r-500: var(--rinfo-sky-500);
-
-  --color-accent-50: var(--rinfo-orange-50);
-  --color-accent-100: var(--rinfo-orange-100);
-  --color-accent-200: var(--rinfo-orange-200);
-  --color-accent-300: var(--rinfo-orange-300);
-  --color-accent-400: var(--rinfo-orange-400);
-  --color-accent-500: var(--rinfo-orange-500);
+  --color-rinfo-50: var(--rinfo-50);
+  --color-rinfo-100: var(--rinfo-100);
+  --color-rinfo-200: var(--rinfo-200);
+  --color-rinfo-300: var(--rinfo-300);
+  --color-rinfo-400: var(--rinfo-400);
+  --color-rinfo-500: var(--rinfo-500);
+  --color-rinfo-600: var(--rinfo-600);
+  --color-rinfo-700: var(--rinfo-700);
+  --color-rinfo-800: var(--rinfo-800);
+  --color-rinfo-900: var(--rinfo-900);
 }
 
 body {

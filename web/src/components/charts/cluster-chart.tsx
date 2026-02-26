@@ -32,7 +32,7 @@ const AXES = [
   },
 ];
 
-const CLUSTER_COLORS = ["#3d7a28", "#5bacd8", "#ff8b54", "#9b59b6"];
+const CLUSTER_COLORS = ["#f47721", "#4a90d9", "#5bba6f", "#9b59b6"];
 const CLUSTER_NAMES = ["그룹 A", "그룹 B", "그룹 C", "그룹 D"];
 
 export function ClusterChart({ universities }: Props) {
@@ -57,15 +57,21 @@ export function ClusterChart({ universities }: Props) {
       const members = labeled.filter((p) => p.cluster === c);
       const avgX = members.reduce((s, p) => s + p.x, 0) / (members.length || 1);
       const avgY = members.reduce((s, p) => s + p.y, 0) / (members.length || 1);
-      return { count: members.length, avgX: Math.round(avgX * 10) / 10, avgY: Math.round(avgY * 10) / 10 };
+      // 중심에 가장 가까운 3개 대학 = 대표 대학
+      const reps = [...members]
+        .map((m) => ({ ...m, dist: (m.x - avgX) ** 2 + (m.y - avgY) ** 2 }))
+        .sort((a, b) => a.dist - b.dist)
+        .slice(0, 3)
+        .map((m) => m.name);
+      return { count: members.length, avgX: Math.round(avgX * 10) / 10, avgY: Math.round(avgY * 10) / 10, reps };
     });
 
     const desc = clusterStats.map((cs, i) =>
-      `${CLUSTER_NAMES[i]}(${cs.count}개): ${axis.xLabel} 평균 ${cs.avgX}, ${axis.yLabel} 평균 ${cs.avgY}`
+      `${CLUSTER_NAMES[i]}(${cs.count}개, 평균 ${axis.xLabel} ${cs.avgX} / ${axis.yLabel} ${cs.avgY}) — 대표 대학: ${cs.reps.join(", ")}`
     ).join(". ");
 
     const n = `K-Means 클러스터링(k=${k})으로 ${pts.length}개 대학을 ${k}개 그룹으로 분류했습니다. ${desc}. ` +
-      `클러스터 간 차이는 대학의 자원 배분 전략과 성과 패턴이 뚜렷하게 구분됨을 시사합니다.`;
+      `같은 그룹에 속한 대학은 비슷한 투자-성과 패턴을 가진 대학으로, 벤치마킹 대상을 찾을 때 참고할 수 있습니다.`;
 
     return { clusters: labeled, narrative: n };
   }, [universities, axis, k]);
@@ -90,7 +96,7 @@ export function ClusterChart({ universities }: Props) {
       </div>
       <ChartWrapper height={400}>
         <ScatterChart margin={{ bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#dcefd3" />
+          <CartesianGrid strokeDasharray="3 3" stroke="#fff5eb" />
           <XAxis type="number" dataKey="x" name={axis.xLabel} fontSize={11} />
           <YAxis type="number" dataKey="y" name={axis.yLabel} fontSize={11} />
           <ZAxis range={[30, 30]} />
