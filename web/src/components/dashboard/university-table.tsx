@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useCallback, useEffect } from "react";
 import Link from "next/link";
 import type { University } from "@/types/university";
 import { formatNumber, formatCurrency } from "@/lib/utils";
@@ -24,6 +24,8 @@ export function UniversityTable({ universities }: Props) {
   const [sizeFilter, setSizeFilter] = useState("");
   const [sortKey, setSortKey] = useState<SortKey>("name");
   const [sortAsc, setSortAsc] = useState(true);
+  const [visibleCount, setVisibleCount] = useState(50);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   const types = useMemo(
     () => [...new Set(universities.map((u) => u.type).filter(Boolean))],
@@ -68,6 +70,27 @@ export function UniversityTable({ universities }: Props) {
       return sortAsc ? cmp : -cmp;
     });
   }, [filtered, sortKey, sortAsc]);
+
+  useEffect(() => {
+    setVisibleCount(50);
+  }, [search, typeFilter, categoryFilter, sizeFilter, sortKey, sortAsc]);
+
+  const loadMore = useCallback(() => {
+    setVisibleCount((prev) => Math.min(prev + 50, sorted.length));
+  }, [sorted.length]);
+
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) loadMore();
+      },
+      { rootMargin: "200px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [loadMore]);
 
   const handleSort = (key: SortKey) => {
     if (sortKey === key) setSortAsc(!sortAsc);
@@ -143,7 +166,7 @@ export function UniversityTable({ universities }: Props) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
-            {sorted.slice(0, 100).map((u) => (
+            {sorted.slice(0, visibleCount).map((u) => (
               <tr key={u.id} className="hover:bg-rinfo-50">
                 <td className="px-4 py-3 font-medium">
                   <Link
@@ -165,10 +188,10 @@ export function UniversityTable({ universities }: Props) {
             ))}
           </tbody>
         </table>
-        {sorted.length > 100 && (
-          <p className="p-3 text-center text-sm text-gray-400">
-            상위 100개 표시 중 (총 {sorted.length}개)
-          </p>
+        {visibleCount < sorted.length && (
+          <div ref={sentinelRef} className="p-4 text-center text-sm text-rinfo-400">
+            {sorted.length - visibleCount}개 더 불러오는 중...
+          </div>
         )}
       </div>
     </div>
